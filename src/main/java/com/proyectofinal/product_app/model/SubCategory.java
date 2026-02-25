@@ -12,13 +12,12 @@ import lombok.Data;
 public class SubCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     private String description;
 
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "categoryid", insertable = false, updatable = false)
     private Category category;
-    private Long categoryid;
-
+    private Integer categoryid;
 }
