@@ -13,7 +13,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(nullable = false, length = 75)
     private String title;
@@ -34,10 +34,10 @@ public class Product {
     @ManyToOne()
     @JoinColumn(name = "subcategoryid", insertable = false, updatable = false)
     private SubCategory subCategory;
-    private Long subcategoryid;
+    private Integer subcategoryid;
 
     @ManyToOne()
     @JoinColumn(name = "categoryid", insertable = false, updatable = false)
     private Category category;
-    private Long categoryid;
+    private Integer categoryid;
 }
