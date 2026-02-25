@@ -3,6 +3,7 @@ package com.proyectofinal.product_app.services;
 import com.proyectofinal.product_app.model.Product;
 import com.proyectofinal.product_app.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.lang.NonNull; // Importante para la seguridad de nulos
 
 import java.util.List;
 
@@ -18,19 +19,23 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Product getProduct(Long id){
+    // Agregamos @NonNull al parámetro 'id'
+    public Product getProduct(@NonNull Long id){
         return productRepository.findById(id).orElse(null);
     }
 
-    public Product addProduct(Product product){
+    // Agregamos @NonNull al parámetro 'product'
+    public Product addProduct(@NonNull Product product){
         return productRepository.save(product);
     }
 
-    public  Product updateProduct(Product product) {
+    // Agregamos @NonNull al parámetro 'product'
+    public Product updateProduct(@NonNull Product product) {
         return productRepository.save(product);
     }
 
-    public void deleteProduct(Long id){
+    // Agregamos @NonNull al parámetro 'id'
+    public void deleteProduct(@NonNull Long id){
         productRepository.deleteById(id);
     }
 }

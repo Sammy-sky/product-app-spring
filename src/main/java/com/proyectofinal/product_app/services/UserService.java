@@ -6,6 +6,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.lang.NonNull; // Importación obligatoria para los avisos
 
 import java.util.List;
 
@@ -25,21 +26,25 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User getUser(Integer id){
+    // Soluciona el aviso de la línea 29
+    public User getUser(@NonNull Integer id){
         return userRepository.findById(id).orElse(null);
     }
 
-    public User addUser(User user){
+    // Lo agregamos por seguridad, aunque el IDE no te haya gritado aquí
+    public User addUser(@NonNull User user){
         // Aquí se encripta y se guarda en el campo Password
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
-    public User updateUser(User user) {
+    // Soluciona el aviso de la línea 39
+    public User updateUser(@NonNull User user) {
         return userRepository.save(user);
     }
 
-    public void deleteUser(Integer id){
+    // Soluciona el aviso de la línea 43
+    public void deleteUser(@NonNull Integer id){
         userRepository.deleteById(id);
     }
 

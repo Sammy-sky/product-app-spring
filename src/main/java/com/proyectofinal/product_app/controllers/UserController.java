@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.lang.NonNull; // Importación obligatoria para los avisos
 
 import java.util.List;
 
@@ -27,24 +28,28 @@ public class UserController {
         return userService.getUsers();
     }
 
+    // Soluciona el aviso de la línea 32
     @GetMapping("/user/{id}")
-    public User getUser(@PathVariable("id") Integer id){
+    public User getUser(@PathVariable("id") @NonNull Integer id){
         return userService.getUser(id);
     }
 
+    // Soluciona el aviso de la línea 37
     @PutMapping("/user/{id}")
-    public User updateUser(@RequestBody() User user, @PathVariable("id") Long id){
+    public User updateUser(@RequestBody() @NonNull User user, @PathVariable("id") Long id){
         return userService.updateUser(user);
     }
 
+    // Soluciona el aviso de la línea 42
     @PostMapping("/register")
-    public ResponseEntity<User> newUser(@RequestBody() User user){
+    public ResponseEntity<User> newUser(@RequestBody() @NonNull User user){
         User newUser = userService.addUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
     }
 
+    // Soluciona el aviso de la línea 48
     @DeleteMapping("/user/{id}")
-    public void deleteUser(@PathVariable("id") Integer id){
+    public void deleteUser(@PathVariable("id") @NonNull Integer id){
         userService.deleteUser(id);
     }
 

@@ -4,6 +4,7 @@ import com.proyectofinal.product_app.model.Category;
 import com.proyectofinal.product_app.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.lang.NonNull; // Importación necesaria para la seguridad de nulos
 
 import java.util.List;
 
@@ -20,15 +21,18 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
-    public Category getCategoryById(Long id) {
+    // Agregamos @NonNull para solucionar el aviso de la línea 24
+    public Category getCategoryById(@NonNull Long id) {
         return categoryRepository.findById(id).orElse(null);
     }
 
-    public Category save(Category category) {
+    // Agregamos @NonNull para solucionar el aviso de la línea 28
+    public Category save(@NonNull Category category) {
         return categoryRepository.save(category);
     }
 
-    public void deleteCategory(Long id){
+    // Agregamos @NonNull para solucionar el aviso de la línea 32
+    public void deleteCategory(@NonNull Long id){
         categoryRepository.deleteById(id);
     }
 }

@@ -4,6 +4,7 @@ import com.proyectofinal.product_app.model.SubCategory;
 import com.proyectofinal.product_app.repositories.SubCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.lang.NonNull; // Importación para la seguridad de nulos
 
 import java.util.List;
 
@@ -21,15 +22,18 @@ public class SubCategoryService {
         return subCategoryRepository.findAll();
     }
 
-    public SubCategory getSubCategoryById(Long id) {
+    // Agregamos @NonNull para solucionar el aviso de la línea 25
+    public SubCategory getSubCategoryById(@NonNull Long id) {
         return subCategoryRepository.findById(id).orElse(null);
     }
 
-    public SubCategory save(SubCategory subCategory) {
+    // Agregamos @NonNull para solucionar el aviso de la línea 29
+    public SubCategory save(@NonNull SubCategory subCategory) {
         return subCategoryRepository.save(subCategory);
     }
 
-    public void deleteSubCategory(Long id){
+    // Agregamos @NonNull para solucionar el aviso de la línea 33
+    public void deleteSubCategory(@NonNull Long id){
         subCategoryRepository.deleteById(id);
     }
 }
