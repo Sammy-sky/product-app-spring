@@ -3,14 +3,13 @@ package com.proyectofinal.product_app.controllers;
 import com.proyectofinal.product_app.model.LoginRequest;
 import com.proyectofinal.product_app.services.UserService;
 import com.proyectofinal.product_app.model.User;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.lang.NonNull; // Importación obligatoria para los avisos
-
+import org.springframework.lang.NonNull;
 import java.util.List;
+
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -54,18 +53,20 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest, HttpSession session) {
-        try{
-            boolean isAuthenticated = userService.authenticate(loginRequest.getUsername(),loginRequest.getPassword());
-
-            if (isAuthenticated){
-                session.setAttribute("user", loginRequest.getUsername());
+    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) { // ✅ sin HttpSession
+        try {
+            boolean isAuthenticated = userService.authenticate(
+                loginRequest.getUsername(), loginRequest.getPassword()
+            );
+            if (isAuthenticated) {
                 return ResponseEntity.ok("Login was successful!");
             } else {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Nombre de usuario o contraseña no válidos");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("Nombre de usuario o contraseña no válidos");
             }
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Se ha producido un error desconocido.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Se ha producido un error desconocido.");
         }
     }
 }

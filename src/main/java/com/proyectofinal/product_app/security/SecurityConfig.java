@@ -49,9 +49,10 @@ public class SecurityConfig {
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
-                .httpBasic(Customizer.withDefaults()) // ← LÍNEA AGREGADA
+                .httpBasic(AbstractHttpConfigurer::disable) // ✅ DESACTIVAR httpBasic
                 .build();
     }
+
 
     @Bean
     public AuthenticationProvider authenticationProvider(){
